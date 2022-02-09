@@ -1,0 +1,22 @@
+name: JustSkins
+version: 1.0
+main: ru.FortiBrine.JustSkins.JustSkins
+
+author: IJustFortiLive
+api-version: 1.16
+
+commands:
+  justskins:
+    usage: /justskins
+    permission: justskins.admin
+    aliases: [justskins, js]
+
+permissions:
+  justskins.*:
+    children:
+      justskins.admin: true 
+      justskins.user: true
+  justskins.admin:
+    default: op
+  justskins.user:
+    default: true
