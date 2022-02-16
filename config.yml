@@ -1,4 +1,6 @@
 skins:
  - IJustFortiLive
 addAndGive: true
-blockedPlayers: []
+players: {}
+standart: Pole
+cd: 5

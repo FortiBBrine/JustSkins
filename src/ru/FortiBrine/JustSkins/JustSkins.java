@@ -9,6 +9,7 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -33,6 +34,8 @@ public class JustSkins extends JavaPlugin {
 	public NMSManager nmsManager;
 	public String sversion;
 	
+	public Map<Player, Long> cd = new HashMap<Player, Long>();
+	public Map<String, String> players;
 	public Map<String, ItemStack> items = new HashMap<String, ItemStack>();
 	
 	@Override
@@ -66,6 +69,10 @@ public class JustSkins extends JavaPlugin {
 	public void loadBlocks() {
 		items = new HashMap<String, ItemStack>();
 		templateConfig = YamlConfiguration.loadConfiguration(templateFile);
+		players = new HashMap<String, String>();
+		for (String key : this.getConfig().getConfigurationSection("players").getKeys(false)) {
+			players.put(key, this.getConfig().getString("players."+key));
+		}
 		
 		for (String nickname : getConfig().getStringList("skins")) {
 			String material = "PLAYER_HEAD";
@@ -84,9 +91,9 @@ public class JustSkins extends JavaPlugin {
 			if (lore==null) lore = new ArrayList<String>();
 			
 			for (int i = 0; i < lore.size(); i++) {
-				lore.set(i, lore.get(i).replace("%skin%", nickname));
+				lore.set(i, lore.get(i).replace("%skin%", nickname).replace("&", "§"));
 			}
-			title = title.replace("%skin%", nickname);
+			title = title.replace("%skin%", nickname).replace("&", "§");
 			
 			meta.setDisplayName(title);
 			meta.setLore(lore);

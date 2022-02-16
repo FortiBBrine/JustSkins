@@ -7,5 +7,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Администратор/Desktop/Core/spigot/1.13.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Администратор/Desktop/Core/spigot/1.14.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Администратор/Desktop/Core/spigot/1.15.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Администратор/Desktop/Server 1.16.5/plugins/SkinsRestorer.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
