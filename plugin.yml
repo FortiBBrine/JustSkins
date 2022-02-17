@@ -10,6 +10,9 @@ commands:
     usage: /justskins
     permission: justskins.admin
     aliases: [justskins, js]
+  unwear:
+    usage: /unwear
+    permission: justskins.user
 
 permissions:
   justskins.*:

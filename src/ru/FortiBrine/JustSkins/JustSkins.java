@@ -17,6 +17,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import ru.FortiBrine.JustSkins.Listeners.Handler;
+import ru.FortiBrine.JustSkins.commands.CommandUnwear;
 import ru.FortiBrine.JustSkins.commands.MainCommand;
 import ru.FortiBrine.JustSkins.versions.NMSManager;
 import ru.FortiBrine.JustSkins.versions.NMSManager_v1_12_R1;
@@ -81,7 +82,8 @@ public class JustSkins extends JavaPlugin {
 			ItemStack item = new ItemStack(Material.matchMaterial(material));
 			
 			SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
-			skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(nickname));
+			skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(nickname))
+			
 			item.setItemMeta(skullMeta);
 			ItemMeta meta = item.getItemMeta();
 			
@@ -105,6 +107,7 @@ public class JustSkins extends JavaPlugin {
 	
 	public void loadCommands() {
 		getCommand("justskins").setExecutor(new MainCommand(this));
+		getCommand("unwear").setExecutor(new CommandUnwear(this));
 	}
 	
 	public boolean checkHead(ItemStack item) {

@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import net.skinsrestorer.api.PlayerWrapper;
@@ -13,7 +14,6 @@ import net.skinsrestorer.api.SkinsRestorerAPI;
 import net.skinsrestorer.api.exception.SkinRequestException;
 import ru.FortiBrine.JustSkins.JustSkins;
 
-@SuppressWarnings("unused")
 public class Handler implements Listener {
 
 	private JustSkins plugin;
@@ -66,6 +66,8 @@ public class Handler implements Listener {
 				return;
 			}
 		}
+		long cd = System.currentTimeMillis()+plugin.getConfig().getLong("cd")*1000;
+		plugin.cd.put(p, cd);
 		
 		if (plugin.players.containsKey(name)) {
 			String message = messageConfig.getString("playerHasBlocked");
@@ -83,7 +85,8 @@ public class Handler implements Listener {
 			api.setSkin(name, skin);
 			api.applySkin(player);
 		} catch (SkinRequestException e1) {
-			e1.printStackTrace();
+			p.sendMessage(messageConfig.getString("skinNotExists").replace("&", "§"));
+			return;
 		}
 		
 		plugin.getConfig().set("players."+name, skin);
@@ -97,7 +100,7 @@ public class Handler implements Listener {
 			p.sendMessage(message);
 		}
 
-		long cd = System.currentTimeMillis()+plugin.getConfig().getLong("cd")*1000;
-		plugin.cd.put(p, cd);
+		Inventory inv = p.getInventory();
+		inv.removeItem(item);
 	}
 }
